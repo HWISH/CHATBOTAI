@@ -1,14 +1,13 @@
-import OpenAI from "openai";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import { OpenAI } from "openai";
 
-// Load environment variables from .env file
 dotenv.config();
 
 const app = express();
-const port = 1520;
+const port = process.env.PORT || 1520;
 
 app.use(bodyParser.json());
 app.use(cors());

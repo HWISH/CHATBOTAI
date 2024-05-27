@@ -2,6 +2,10 @@ import OpenAI from "openai";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
 
 const app = express();
 const port = 1520;
@@ -13,25 +17,30 @@ const openai = new OpenAI({
     apiKey: process.env.API_KEY,
 });
 
-app.post("/", async(req, res) => {
+app.post("/", async (req, res) => {
     const { chats } = req.body;
 
-    const result = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [
-      {
-        role: "system",
-        content: "you are my fireBot !!",
-      },
-      ...chats,
-    ],
-  });
+    try {
+        const result = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [
+                {
+                    role: "system",
+                    content: "you are my fireBot !!",
+                },
+                ...chats,
+            ],
+        });
 
-  res.json({
-    output: result.choices[0].message,
-  });
-})
+        res.json({
+            output: result.choices[0].message,
+        });
+    } catch (error) {
+        console.error("Error creating completion:", error);
+        res.status(500).json({ error: "Error creating completion" });
+    }
+});
 
 app.listen(port, () => {
-    console.log(`Listening om port ${port}`);
-})
+    console.log(`Listening on port ${port}`);
+});

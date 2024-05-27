@@ -5,8 +5,11 @@
   "main": "index.js",
   "type": "module",
  "scripts": {
-  "start": "node index.js",
-  "deploy": "gh-pages -d build"
+  "start-backend": "cd backend && node index.js",
+  "start-frontend": "cd frontend && npm install && npm run dev"
+  
+
+
 },
 
   "keywords": [],

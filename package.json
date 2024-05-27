@@ -6,8 +6,8 @@
   "type": "module",
  "scripts": {
   "start-backend": "cd backend && node index.js",
-  "start-frontend": "cd frontend && npm install && npm run dev"
-  
+  "start-frontend": "cd frontend && npm install && npm install @vitejs/plugin-react --save-dev && npm run dev"
+
 
 
 },
